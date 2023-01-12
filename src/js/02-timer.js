@@ -31,27 +31,28 @@ const options = {
   },
 };
 
-const fpr = flatpickr(flatpickrSelector, options);
+const fp = flatpickr(flatpickrSelector, options);
 function onButtonClick() {
   buttonStart.disabled = true;
   flatpickrSelector.disabled = true;
   Notiflix.Notify.success("Let's start!");
-}
+//}
 timerId = setInterval(() => {
-  const timeDecrement = selected.getTime() - Date.now;
+  const timeDecrement = selected.getTime() - Date.now();
   if (timeDecrement <= 0) {
     clearInterval(timerId);
     Notiflix.Notify.info("Time's up!");
     return;
   }
-});
-
 const { days, hours, minutes, seconds } = convertMs(timeDecrement);
 
 daysEl.textContent = addLeadingZero(days);
 hoursEl.textContent = addLeadingZero(hours);
 minutesEl.textContent = addLeadingZero(minutes);
 secondsEl.textContent = addLeadingZero(seconds);
+}, 1000);
+}
+
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
